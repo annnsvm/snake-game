@@ -3,4 +3,5 @@ export const dom = {
   instructionText: document.getElementById('instruction-text'),
   logo: document.getElementById('logo'),
   score: document.getElementById('score'),
+  highScoreText: document.getElementById('highScore'),
 };
