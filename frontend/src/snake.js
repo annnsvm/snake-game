@@ -8,6 +8,9 @@ export function setDirectionByKey(key) {
     ArrowLeft: 'left',
     ArrowRight: 'right',
   };
+
+  // Ignore invalid keys, do nothing if no key is pressed
+
   if (!map[key]) return;
 
   const next = map[key];
@@ -18,7 +21,7 @@ export function setDirectionByKey(key) {
   if (tryingToReverse && state.snake.length > 1) {
     return;
   }
-
+  // set new direction
   state.direction = next;
 }
 
@@ -45,6 +48,7 @@ export function moveSnake(onEat) {
       break;
   }
 
+  state.snake.unshift(newHead);
   const ateFood = state.food && newHead.x === state.food.x && newHead.y === state.food.y;
   if (ateFood) {
     if (typeof onEat === 'function') {
@@ -53,6 +57,35 @@ export function moveSnake(onEat) {
       state.snake.pop();
     }
   }
+}
 
-  state.snake.unshift(newHead);
+export function increaseSpeed() {
+  // increase speed by decreasing the interval time
+  const d = state.gameSpeedMs();
+  if (d > 150) {
+    state.gameSpeedMs = d - 5;
+  } else if (d > 100) {
+    state.gameSpeedMs = d - 3;
+  } else if (d > 50) {
+    state.gameSpeedMs = d - 2;
+  } else if (d > 25) {
+    state.gameSpeedMs = d - 1;
+  }
+}
+
+export function hitSelfOrWall() {
+  const head = state.snake[0];
+  const max = state.gridSize;
+  // Check wall collisions
+  if (head.x < 1 || head.x >= max || head.y < 1 || head.y >= max) {
+    return true;
+  }
+  // Check self collisions
+  for (let i = 1; i < state.snake.length; i++) {
+    const segment = state.snake[i];
+    if (head.x === segment.x && head.y === segment.y) {
+      return true;
+    }
+  }
+  return false;
 }
