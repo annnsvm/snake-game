@@ -1,5 +1,5 @@
-import { state } from './state';
-import { rand1to, createElement, setPosition } from './utils';
+import { state } from './state.js';
+import { rand1to, createElement, setPosition } from './utils.js';
 
 export function generateFood() {
   state.food = { x: rand1to(state.gridSize), y: rand1to(state.gridSize) };

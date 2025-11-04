@@ -44,7 +44,7 @@ body,
   width: 300px;
   text-align: center;
   text-transform: capitalize;
-  padding: 42px;
+  padding: 50px;
   margin: 0;
 }
 
@@ -85,4 +85,10 @@ body,
 
 #logo {
   position: absolute;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#logo:hover {
+  transform: scale(1.05);
 }

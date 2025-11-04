@@ -8,8 +8,8 @@ export function createElement(tag, className) {
 }
 
 export function setPosition(element, position) {
-  element.setProperty('grid-column', position.x);
-  element.setProperty('grid-row', position.y);
+  element.style.setProperty('grid-column', position.x);
+  element.style.setProperty('grid-row', position.y);
 }
 
 // Pads a number to at least 3 digits with leading zeros

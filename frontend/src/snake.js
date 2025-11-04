@@ -1,4 +1,4 @@
-import { state } from './state';
+import { state } from './state.js';
 
 // Sets the snake's direction based on keyboard input
 export function setDirectionByKey(key) {
@@ -48,20 +48,21 @@ export function moveSnake(onEat) {
       break;
   }
 
+  // console.log('moveSnake: newHead', newHead, 'food', state.food);
+
   state.snake.unshift(newHead);
+
   const ateFood = state.food && newHead.x === state.food.x && newHead.y === state.food.y;
   if (ateFood) {
-    if (typeof onEat === 'function') {
-      onEat();
-    } else {
-      state.snake.pop();
-    }
+    if (typeof onEat === 'function') onEat();
+  } else {
+    state.snake.pop();
   }
 }
 
 export function increaseSpeed() {
   // increase speed by decreasing the interval time
-  const d = state.gameSpeedMs();
+  const d = state.gameSpeedMs;
   if (d > 150) {
     state.gameSpeedMs = d - 5;
   } else if (d > 100) {
@@ -77,7 +78,7 @@ export function hitSelfOrWall() {
   const head = state.snake[0];
   const max = state.gridSize;
   // Check wall collisions
-  if (head.x < 1 || head.x >= max || head.y < 1 || head.y >= max) {
+  if (head.x < 1 || head.x >= max + 1 || head.y < 1 || head.y >= max + 1) {
     return true;
   }
   // Check self collisions

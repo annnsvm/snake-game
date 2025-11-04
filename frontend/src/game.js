@@ -3,7 +3,7 @@
 import { state, resetState } from './state.js';
 import { dom } from './dom.js';
 import { moveSnake, hitSelfOrWall, increaseSpeed } from './snake.js';
-import { drawFrame, drawSnake } from './render.js';
+import { clearBoard, drawFrame, updateHighScore, updateScore } from './render.js';
 import { generateFood } from './food.js';
 
 export function startGame() {
@@ -20,10 +20,13 @@ export function startGame() {
   runLoop();
 }
 
+console.log('game.js loaded');
+
 export function endGame() {
   clearInterval(state.intervalId);
   state.intervalId = null;
   state.gameStarted = false;
+  clearBoard();
 
   dom.instructionText.style.display = 'block';
   dom.logo.style.display = 'block';

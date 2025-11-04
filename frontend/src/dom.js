@@ -5,3 +5,5 @@ export const dom = {
   score: document.getElementById('score'),
   highScoreText: document.getElementById('highScore'),
 };
+
+// console.log(dom.score); // должно вывести элемент, например: <span id="score">000</span>

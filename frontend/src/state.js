@@ -1,4 +1,4 @@
-import { START_SNAKE, START_DIR, START_SPEED_MS, GRID_SIZE } from './constants';
+import { START_SNAKE, START_DIR, START_SPEED_MS, GRID_SIZE } from './constants.js';
 
 export const state = {
   snake: structuredClone(START_SNAKE),
@@ -13,8 +13,14 @@ export const state = {
 
 // reset state after game is over
 
-export const resetState = {
-  snake: structuredClone(START_SNAKE),
-  gameSpeedMs: START_SNAKE,
-  direction: START_DIR,
-};
+export function resetState() {
+  state.snake = structuredClone(START_SNAKE);
+  state.direction = START_DIR;
+  state.gameSpeedMs = START_SPEED_MS;
+  state.food = null;
+  state.gameStarted = false;
+  if (state.intervalId) {
+    clearInterval(state.intervalId);
+    state.intervalId = null;
+  }
+}
