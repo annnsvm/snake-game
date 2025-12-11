@@ -10,6 +10,14 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
+  overrides: [
+    {
+      files: ['**/*.test.js'],
+      env: {
+        jest: true,
+      },
+    },
+  ],
   rules: {
     // Customize rules as you like
     'import/prefer-default-export': 'off', // allow single named exports
